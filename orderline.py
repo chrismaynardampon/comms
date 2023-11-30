@@ -13,6 +13,7 @@
 # Last modified: <date here>
 # Acknowledgements: <list of sites or borrowed libraries and sources>
 
+# Variable Initializations
 meal1 = "Classic Burger Meal"
 meal2 = "Cheeseburger Meal"
 meal3 = "Chicken Sandwich Meal"
@@ -45,7 +46,7 @@ while order_count <= 3:
         print("2 - Cancel")
         input_num = input("Enter the number of your choice. ")
 
-    if input_num == "2" or order_count == 3:
+    if input_num == "2" or order_count == 3: # Cancel or Max Order
         if order_count != 0:
             summary += "Amount Due\t\t\t\tPhP "+str(amount_due)+"\n"
             summary += "----------------------------------------------------------------------------"
@@ -53,13 +54,14 @@ while order_count <= 3:
             input_payment = 0
             while input_payment < amount_due:
                 if input_payment != 0:
-                    print("You gave an insufficient amount.\n")
+                    print("You gave an insufficient amount.")
                 input_payment = int(input("How much is your money? "))
             delivery_details += "Name: "+input_name+"\n"
             delivery_details += "Address: "+input_address+"\n"
             delivery_details += "Contact No.: "+input_phone+"\n"
             print(delivery_details)
             print("Thank You for purchasing! You will enjoy your order soon!\n")
+        # Reset
         order_count = 0
         
     else:
@@ -107,7 +109,7 @@ while order_count <= 3:
             while input_size != "r" and input_size != "m" and input_size != "l":
                 if input_size !="":
                     print("You have entered an invalid input.\nPlease select from the choices.")
-                input_size = input("Enter the size of your meal choice. ")
+                input_size = input("What meal size? (r, m, or l) ")
 
             if input_size == "r":
                 input_size = "Regular"
@@ -133,11 +135,12 @@ while order_count <= 3:
                     input_price = 155
                 else:
                     input_price = 155
+            
             summary += "Order "+str(order_count)+"\n"
             summary += " "+input_size+" "+input_meal+"\t\tPhP "+str(input_price)+"\n"
             amount_due += input_price
 
-            # Add-on
+            # Add-on Confirmation
             input_addon_confirm = ""
             while input_addon_confirm != "y" and input_addon_confirm != "n":
                 if input_addon_confirm != "":
@@ -151,8 +154,8 @@ while order_count <= 3:
                 input_addon = ""
                 input_addon_price = 0
             else:
-
-                while input_addon != "4" and input_addon != "5" and input_addon != "6":
+                # Add-on
+                while input_addon != "4" and input_addon != "5" and input_addon != "6" and input_addon != "7":
                     if input_addon !="":
                         print("You have entered an invalid input.\nPlease select from the choices.")
                     input_addon = input("What do you want to add? (4, 5, or 6) ")
@@ -166,14 +169,16 @@ while order_count <= 3:
                 elif input_addon == "6":
                     input_addon = "Chocolate Sundae"
                     input_addon_price = 20
-                else:
+                else: # Cancel add-on (7)
                     input_addon = ""
                     input_addon_price = 0
 
-                print(input_addon+" is successfully added.")
-                summary += " add "+input_addon+"\t\tPhP "+str(input_addon_price)+"\n"
-                amount_due += input_addon_price
+                if input_addon != "":
+                    print(input_addon+" is successfully added.")
+                    summary += " add "+input_addon+"\t\tPhP "+str(input_addon_price)+"\n"
+                    amount_due += input_addon_price
             
+            # Another Order
             input_anotherOrder = ""
             while input_anotherOrder != "y" and input_anotherOrder != "n" and order_count != 3:
                 if input_anotherOrder !="":
